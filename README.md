@@ -1,6 +1,7 @@
 # **🅱️io**ni.nvim 
 A **ti**ny **pl**ugin to **h**elp **pe**ople **r**ead **c**ode **fa**ster.
 ![image](https://github.com/HampusHauffman/bionic.nvim/assets/3845743/8ebb44af-9a59-43f6-b80a-4ea24c452f1a)
+Screenshot is taken on `Kitty` terminal with `font_family FiraCode Nerd Font` and `dracula`as colortheme
 ## ⚡️ Requirements
 A terminal and a font that supports **BOLD**
 ## 🚀 Usage
