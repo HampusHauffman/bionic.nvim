@@ -1,4 +1,5 @@
 # 🅱️ioni.nvim 
+A tiny plugin to help people with read code faster.
 ## ⚡️ Requirements
 A terminal and a font that supports **BOLD**
 ## 🚀 Usage
@@ -16,4 +17,8 @@ A terminal and a font that supports **BOLD**
 use "HampusHauffman/bionic.nvim",
 ```
 ## ⚙️ Configuration
-TODO
+Currently there is no config options
+
+## 📝 Todo
+* Add Configuration option
+* Add vim docs for usage
