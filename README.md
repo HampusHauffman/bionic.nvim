@@ -25,7 +25,7 @@ You can turn this on by default with an aucmd:
 vim.cmd([[
   augroup BionicAutocmd
     autocmd!
-    autocmd BufRead,BufNewFile * Bionic
+    autocmd FileType * Bionic
   augroup END
 ]])
 ```
