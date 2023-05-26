@@ -42,7 +42,6 @@ local function update(bufnr)
     set_bold(ts_node)
 end
 
-local is_on = false
 ---@param bufnr integer
 local function add_buff_and_start(bufnr)
     local lang = parsers.get_buf_lang(bufnr)
@@ -67,7 +66,6 @@ end
 
 
 function M.on()
-    is_on = true
     local bufnr = api.nvim_get_current_buf()
     if not buffers[bufnr] then
         add_buff_and_start(bufnr)
@@ -75,7 +73,6 @@ function M.on()
 end
 
 function M.off()
-    is_on = false
     local bufnr = api.nvim_get_current_buf()
     vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
     if buffers[bufnr] then
@@ -86,7 +83,8 @@ function M.off()
 end
 
 function M.toggle()
-    if is_on then
+    local bufnr = api.nvim_get_current_buf()
+    if buffers[bufnr] then
         M.off()
     else
         M.on()
