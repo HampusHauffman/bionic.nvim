@@ -46,6 +46,7 @@ end
 local function add_buff_and_start(bufnr)
     local lang = parsers.get_buf_lang(bufnr)
     local parser = ts.get_parser(bufnr, lang)
+    if parser == nil then return end
     buffers[bufnr] = { lang = lang, parser = parser }
     vim.api.nvim_buf_clear_namespace(0, ns_id, 0, -1)
     update(bufnr)
