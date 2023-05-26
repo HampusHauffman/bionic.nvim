@@ -29,6 +29,8 @@ vim.cmd([[
   augroup END
 ]])
 ```
+## ⁉️ Motivation
+I feel this helps with my dylexia, especially in dense texts such as the vim doc / help files.e
 
 ## 📝 Todo
 * Add Configuration option
