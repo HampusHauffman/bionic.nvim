@@ -45,10 +45,11 @@ end
 
 ---@param bufnr integer
 local function add_buff_and_start(bufnr)
-    local lang = parsers.get_buf_lang(bufnr)
-    if not lang then return end     -- Return if language cannot be determined
-    local parser = ts.get_parser(bufnr, lang)
-    if not parser then return end
+    local success_lang, lang = pcall(parsers.get_buf_lang, bufnr)
+    if not success_lang then return end  -- Return if an error occurs while retrieving the language
+
+    local success_parser, parser = pcall(ts.get_parser, bufnr, lang)
+    if not success_parser or not parser then return end  -- Return if an error occurs or the parser is not available
 
     buffers[bufnr] = { lang = lang, parser = parser }
     vim.api.nvim_buf_clear_namespace(0, ns_id, 0, -1)
