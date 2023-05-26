@@ -14,7 +14,7 @@ vim.cmd('highlight ' .. bionic .. ' gui=bold')
 
 ---@param ts_node TSNode
 local function set_bold(ts_node)
-    local start_row, start_col, end_row, end_col = ts_node:range()
+    local start_row, start_col, _, end_col = ts_node:range()
     local bolds = 0
     if end_col - start_col > 6 then
         bolds = 3
@@ -43,8 +43,8 @@ local function update(bufnr)
 end
 
 local is_on = false
-local function add_buff_and_start()
-    local bufnr = api.nvim_get_current_buf()
+---@param bufnr integer
+local function add_buff_and_start(bufnr)
     local lang = parsers.get_buf_lang(bufnr)
     local parser = ts.get_parser(bufnr, lang)
     buffers[bufnr] = { lang = lang, parser = parser }
@@ -68,13 +68,17 @@ end
 
 function M.on()
     is_on = true
-    add_buff_and_start()
+    local bufnr = api.nvim_get_current_buf()
+    if buffers[bufnr] then
+        add_buff_and_start(bufnr)
+    end
 end
 
 function M.off()
     is_on = false
-    vim.api.nvim_buf_clear_namespace(0, ns_id, 0, -1)
-    buffers = {}
+    local bufnr = api.nvim_get_current_buf()
+    vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
+    buffers[bufnr] = nil
 end
 
 function M.toggle()
