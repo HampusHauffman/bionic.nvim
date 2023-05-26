@@ -26,6 +26,7 @@ local function set_bold(ts_node)
 
     for c in ts_node:iter_children() do
         local c_start_row, c_start_col = set_bold(c)
+        -- No bold if a child starts after first character improves visuals
         if c_start_row == start_row and c_start_col <= start_col + 1 then
             bolds = 0
         end
@@ -56,7 +57,7 @@ local function add_buff_and_start(bufnr)
             vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
             update(bufnr)
             vim.defer_fn(
-                function()     -- HACK: For some reason formatting clears the HL, This is to update it after that is done
+                function() -- HACK: For some reason formatting clears the HL, This is to update it after that is done
                     update(bufnr)
                 end, 0)
         end
