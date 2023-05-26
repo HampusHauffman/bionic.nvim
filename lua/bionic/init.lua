@@ -52,14 +52,12 @@ local function add_buff_and_start(bufnr)
 
     parser:register_cbs({
         on_changedtree = function()
-            if is_on then
-                vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
-                update(bufnr)
-                vim.defer_fn(
-                    function() -- HACK: For some reason formatting clears the HL, This is to update it after that is done
-                        update(bufnr)
-                    end, 0)
-            end
+            vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
+            update(bufnr)
+            vim.defer_fn(
+                function()     -- HACK: For some reason formatting clears the HL, This is to update it after that is done
+                    update(bufnr)
+                end, 0)
         end
     })
 end
