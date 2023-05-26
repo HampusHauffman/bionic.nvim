@@ -30,7 +30,8 @@ vim.cmd([[
 ]])
 ```
 ## ⁉️ Motivation
-I feel this helps with my dylexia, especially in dense texts such as the vim doc / help files.e
+I feel this helps with my dylexia, especially in dense texts such as the vim doc / help files
+![image](https://github.com/HampusHauffman/bionic.nvim/assets/3845743/ef7be9fe-c91c-4c01-bb61-2e0b261bdffb)
 
 ## 📝 Todo
 * Add Configuration option
