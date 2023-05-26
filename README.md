@@ -1,4 +1,4 @@
-# 🅱️ioni.nvim 
+# **🅱️io**ni.nvim 
 A tiny plugin to help people with read code faster.
 ![image](https://github.com/HampusHauffman/bionic.nvim/assets/3845743/8ebb44af-9a59-43f6-b80a-4ea24c452f1a)
 ## ⚡️ Requirements
