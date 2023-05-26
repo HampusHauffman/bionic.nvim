@@ -18,7 +18,16 @@ A terminal and a font that supports **BOLD**
 use "HampusHauffman/bionic.nvim",
 ```
 ## ⚙️ Configuration
-Currently there is no config options
+Currently there is no config options.
+You can turn this on by default with an aucmd:
+```lua
+vim.cmd([[
+  augroup BionicAutocmd
+    autocmd!
+    autocmd BufRead,BufNewFile * Bionic
+  augroup END
+]])
+```
 
 ## 📝 Todo
 * Add Configuration option
