@@ -13,7 +13,8 @@ local buffers = {}
 vim.cmd('highlight ' .. bionic .. ' gui=bold')
 
 ---@param ts_node TSNode
-local function set_bold(ts_node)
+---@param bufnr integer
+local function set_bold(ts_node, bufnr)
     local start_row, start_col, _, end_col = ts_node:range()
     local bolds = 0
     if end_col - start_col > 6 then
@@ -25,13 +26,13 @@ local function set_bold(ts_node)
     end
 
     for c in ts_node:iter_children() do
-        local c_start_row, c_start_col = set_bold(c)
+        local c_start_row, c_start_col = set_bold(c, bufnr)
         -- No bold if a child starts after first character improves visuals
         if c_start_row == start_row and c_start_col <= start_col + 1 then
             bolds = 0
         end
     end
-    vim.api.nvim_buf_add_highlight(0, ns_id, bionic, start_row, start_col, start_col + bolds)
+    vim.api.nvim_buf_add_highlight(bufnr, ns_id, bionic, start_row, start_col, start_col + bolds)
     return start_row, start_col
 end
 
@@ -40,16 +41,16 @@ local function update(bufnr)
     local lang_tree = buffers[bufnr].parser
     local trees = lang_tree:trees()
     local ts_node = trees[1]:root()
-    set_bold(ts_node)
+    set_bold(ts_node, bufnr)
 end
 
 ---@param bufnr integer
 local function add_buff_and_start(bufnr)
     local success_lang, lang = pcall(parsers.get_buf_lang, bufnr)
-    if not success_lang then return end  -- Return if an error occurs while retrieving the language
+    if not success_lang then return end -- Return if an error occurs while retrieving the language
 
     local success_parser, parser = pcall(ts.get_parser, bufnr, lang)
-    if not success_parser or not parser then return end  -- Return if an error occurs or the parser is not available
+    if not success_parser or not parser then return end -- Return if an error occurs or the parser is not available
 
     buffers[bufnr] = { lang = lang, parser = parser }
     vim.api.nvim_buf_clear_namespace(0, ns_id, 0, -1)
