@@ -1,6 +1,6 @@
 # 🅱️ioni.nvim 
 A tiny plugin to help people with read code faster.
-https://user-images.githubusercontent.com/3845743/241267962-bee49a5a-1a92-495b-988a-589eded10de2.png
+![image](https://user-images.githubusercontent.com/3845743/241267962-bee49a5a-1a92-495b-988a-589eded10de2.png)
 ## ⚡️ Requirements
 A terminal and a font that supports **BOLD**
 ## 🚀 Usage
