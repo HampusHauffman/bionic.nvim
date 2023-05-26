@@ -78,9 +78,11 @@ function M.off()
     is_on = false
     local bufnr = api.nvim_get_current_buf()
     vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
-    local parser = buffers[bufnr].parser
-    parser:register_cbs({}) -- Remove all callbacks by registering an empty table
-    buffers[bufnr] = nil
+    if buffers[bufnr] then
+        local parser = buffers[bufnr].parser
+        parser:register_cbs({}) -- Remove all callbacks by registering an empty table
+        buffers[bufnr] = nil
+    end
 end
 
 function M.toggle()
