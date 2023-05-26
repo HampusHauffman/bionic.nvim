@@ -42,7 +42,8 @@ local function update(bufnr)
     set_bold(ts_node)
 end
 
-local function start()
+local is_on = false
+local function add_buff_and_start()
     local bufnr = api.nvim_get_current_buf()
     local lang = parsers.get_buf_lang(bufnr)
     local parser = ts.get_parser(bufnr, lang)
@@ -55,18 +56,19 @@ local function start()
             vim.api.nvim_buf_clear_namespace(0, ns_id, 0, -1)
             update(bufnr)
             vim.defer_fn(
-            function()     -- HACK: For some reason formatting clears the HL, This is to update it after that is done
-                update(bufnr)
-            end, 0)
+                function() -- HACK: For some reason formatting clears the HL, This is to update it after that is done
+                    if is_on then
+                        update(bufnr)
+                    end
+                end, 0)
         end
     })
 end
 
-local is_on = false
 
 function M.on()
     is_on = true
-    start()
+    add_buff_and_start()
 end
 
 function M.off()
@@ -82,6 +84,5 @@ function M.toggle()
         M.on()
     end
 end
-
 
 return M
